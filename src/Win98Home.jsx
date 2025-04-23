@@ -3,19 +3,12 @@ import DraggableWindow from './components/Window';
 import AboutMeContent from './components/AboutMe';
 import ProjectsContent from './components/Projects';
 import ResumeContent from './components/Resume';
-import { 
-  AppBar, 
-  Button, 
-  Toolbar,
-  MenuList,
-  MenuListItem,
-  Separator,
-  styleReset
-} from 'react95';
+import ContactContent from './components/ContactMe';
+// ** React95 Imports **
+import { AppBar, Button, Toolbar, MenuList, MenuListItem, Separator, styleReset} from 'react95';
 import { createGlobalStyle, ThemeProvider, styled } from 'styled-components';
-/* Pick a theme of your choice */
-import original from 'react95/dist/themes/original';
-/* Original Windows95 font (optional) */
+/* Fonts and Theme */
+import original from 'react95/dist/themes/original'; 
 import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
 import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
 
@@ -114,34 +107,6 @@ const ClockArea = styled.div`
   background-color: #c0c0c0;
   box-shadow: inset 1px 1px #fff, inset -1px -1px #888;
 `;
-
-// Window content components
-
-const ContactContent = () => (
-  <div>
-    <h2>Contact Me</h2>
-    <p>Feel free to reach out! I'm always open to new opportunities and collaborations.</p>
-    <div style={{ marginBottom: '15px' }}>
-      <p><strong>Email:</strong> hello@example.com</p>
-      <p><strong>Phone:</strong> (123) 456-7890</p>
-    </div>
-    <h3>Send a Message</h3>
-    <div style={{ marginBottom: '10px' }}>
-      <p>Name:</p>
-      <input type="text" style={{ width: '100%' }} />
-    </div>
-    <div style={{ marginBottom: '10px' }}>
-      <p>Email:</p>
-      <input type="email" style={{ width: '100%' }} />
-    </div>
-    <div style={{ marginBottom: '10px' }}>
-      <p>Message:</p>
-      <textarea style={{ width: '100%', height: '100px' }} />
-    </div>
-    <Button>Send Message</Button>
-  </div>
-);
-
 const Win98Portfolio = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState('');

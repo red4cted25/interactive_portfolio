@@ -1,30 +1,94 @@
-import { Button } from "react95";
+import { useState } from "react";
+import { AppBar, Button, Frame, Tab, Tabs, TabBody, Toolbar } from "react95";
 
-const ResumeContent = () => (
-    <div>
-        <h2>Resume</h2>
-        <h3>Experience</h3>
-        <div style={{ marginBottom: '15px' }}>
-            <h4>Senior Frontend Developer - Tech Co.</h4>
-            <p>2020 - Present</p>
-            <ul>
-                <li>Led development of company's flagship web application</li>
-                <li>Implemented CI/CD pipeline reducing deployment time by 70%</li>
-                <li>Mentored junior developers</li>
-            </ul>
+const ResumeContent = () => {
+    const [activeTab, setActiveTab] = useState(0);
+    
+    return (
+        <div className="flex flex-col h-full">
+            <Tabs value={activeTab} onChange={(value) => setActiveTab(value)}>
+                <Tab value={0}>Education</Tab>
+                <Tab value={1}>Experience</Tab>
+                <Tab value={2}>Skills</Tab>
+            </Tabs>
+            <TabBody className="flex-1 overflow-y-auto">
+                {activeTab === 0 && (
+                    <div className="tab-content">
+                        <Frame 
+                            variant="field" 
+                            className="education-frame mb-4" 
+                            style={{ padding: '16px', marginTop: '16px' }}
+                        >
+                            <h3 className="font-bold">West-MEC NEC - Coding</h3>
+                            <p>2023 - 2025</p>
+                            <ul className="list-disc pl-5">
+                                <li>Completed West-MEC's Coding Program focused on web and mobile development</li>
+                                <li>Proficient in HTML, CSS, JavaScript, Python, and React</li>
+                                <li>Built full-stack projects individually and in teams</li>
+                                <li>Trained in agile workflows, version control, and responsible design practices</li>
+                            </ul>
+                        </Frame>
+                        
+                        <Frame 
+                            variant="field" 
+                            className="education-frame mb-4" 
+                            style={{ padding: '16px', marginTop: '16px' }}
+                        >
+                            <h3 className="font-bold">Moon Valley High School</h3>
+                            <p>2021 - 2025</p>
+                            <ul className="list-disc pl-5">
+                                <li>Earned 3.8 Unweighted, 4.7 Weighted GPA</li>
+                                <li>Supported school community with leadership and mentoring peers</li>
+                            </ul>
+                        </Frame>
+
+                        <Frame 
+                            variant="field" 
+                            className="education-frame mb-4" 
+                            style={{ padding: '16px', marginTop: '16px', width: '100%' }}
+                        >
+                            <h3 className="font-bold">B.S. Computer Science - Arizona State University</h3>
+                            <p>2025 - Present</p>
+                            <ul className="list-disc pl-5">
+                                <li>Enrolled in Barrett, The Honors College</li>
+                                <li>Earned New American University Scholarship</li>
+                            </ul>
+                        </Frame>
+                    </div>
+                )}
+
+                {activeTab === 1 && (
+                    <div className="tab-content">
+                        <Frame variant="field" className="mb-4" style={{ padding: '16px', marginTop: '16px' }}>
+                            <h3 className="font-bold">Work Experience Content</h3>
+                            <p>Your work experience details would go here...</p>
+                        </Frame>
+                    </div>
+                )}
+                
+                {activeTab === 2 && (
+                    <div className="tab-content">
+                        <Frame variant="field" className="mb-4" style={{ padding: '16px', marginTop: '16px' }}>
+                            <h3 className="font-bold">Technical Skills</h3>
+                            <ul className="list-disc pl-5">
+                                <li>HTML, CSS, JavaScript</li>
+                                <li>React, Python</li>
+                                <li>Agile Workflows</li>
+                                <li>Version Control (Git)</li>
+                            </ul>
+                        </Frame>
+                    </div>
+                )}
+            </TabBody>
+            <AppBar position="static" className="mt-4">
+                <Toolbar style={{ justifyContent: 'flex-end' }}>
+                    <a href="/Resume.pdf" target='_blank' className="mt-3 ml-auto">
+                        <Button>Download PDF</Button>
+                    </a>
+                </Toolbar>
+            </AppBar>
         </div>
-        <div>
-            <h4>Web Developer - Digital Agency</h4>
-            <p>2018 - 2020</p>
-            <ul>
-                <li>Built responsive websites for various clients</li>
-                <li>Collaborated with design team to implement UI/UX improvements</li>
-            </ul>
-        </div>
-        <h3>Education</h3>
-        <p>B.S. Computer Science - University Name, 2018</p>
-        <Button style={{ marginTop: '15px' }} href="/Resume.pdf" target='_blank'>Download PDF</Button>
-    </div>
-);
+    );
+};
 
 export default ResumeContent;
