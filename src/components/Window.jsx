@@ -1,5 +1,5 @@
 import Draggable from "react-draggable";
-import { Button, Window, WindowHeader, WindowContent } from 'react95';
+import { Button, ScrollView, Window, WindowHeader, WindowContent } from 'react95';
 import { styled } from 'styled-components';
 
 const StyledWindow = styled(Window)`
@@ -28,9 +28,11 @@ const DraggableWindow = ({ id, title, children, initialPosition, onClose, onFocu
                         <span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>×</span>
                     </Button>
                 </WindowHeader>
-                <WindowContent className="overflow-y-auto" style={{ maxHeight: 'calc(80vh - 33px)' }}>
-                    {children}
-                </WindowContent>
+                <ScrollView>
+                    <WindowContent className="overflow-y-auto" style={{ maxHeight: 'calc(80vh - 33px)' }}>
+                        {children}
+                    </WindowContent>
+                </ScrollView>
             </StyledWindow>
         </Draggable>
     );

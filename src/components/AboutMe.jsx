@@ -1,16 +1,16 @@
+import { Frame } from 'react95'
+
 const AboutMeContent = () => (
-    <div>
-        <h2>About Me</h2>
-        <p>Hello! I'm a web developer with a passion for creating unique and engaging user experiences.</p>
-        <p>My skills include:</p>
-        <ul>
-            <li>Frontend Development (React, Vue, Angular)</li>
-            <li>UI/UX Design</li>
-            <li>Backend Development (Node.js, Express)</li>
-            <li>Database Management (MongoDB, MySQL)</li>
-        </ul>
-        <p>When I'm not coding, you can find me hiking, reading, or exploring new coffee shops.</p>
-    </div>
+    <Frame
+        variant="field"
+        className="about-me-frame my-4 p-4"
+    >
+        <p>Hey! I'm Nicolas, or Nico, a junior full stack web developer with a passion for creating unique and engaging user experiences.</p>
+        <br />
+        
+        <br />
+        <p>When I'm not coding, you can find me gaming, reading, learning cybersecurity, or researching random topics that cross my mind.</p>
+    </Frame>
 );
 
 export default AboutMeContent;
