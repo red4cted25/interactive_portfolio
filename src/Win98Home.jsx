@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import DraggableWindow from './components/Window';
-import AboutMeContent from './components/AboutMe';
-import ProjectsContent from './components/Projects';
-import ResumeContent from './components/Resume';
-import ContactContent from './components/ContactMe';
+import AboutMeContent from './AboutMe';
+import ProjectsContent from './Projects';
+import ResumeContent from './Resume';
+import ContactContent from './ContactMe';
 // ** React95 Imports **
 import { AppBar, Button, Toolbar, MenuList, MenuListItem, Separator, styleReset} from 'react95';
 import { createGlobalStyle, ThemeProvider, styled } from 'styled-components';
