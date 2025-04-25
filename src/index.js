@@ -12,6 +12,8 @@ const preloadResources = () => {
     sounds.forEach(sound => {
         const audio = new Audio();
         audio.src = sound;
+        audio.preload = 'auto';
+        audio.loop = false;
     });
     
     const images = ['https://res.cloudinary.com/drnaycy06/image/upload/v1745532998/Windows_Logo__1992-2001_.svg_osqvuf.png'];

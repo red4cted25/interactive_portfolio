@@ -48,6 +48,7 @@ const AppStarter = () => {
         setStarted(true);
     };
 
+    
     if (!started) {
         return (
         <StartContainer>
