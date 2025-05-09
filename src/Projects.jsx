@@ -47,7 +47,7 @@ const FileView = styled.div`
 
 const IconGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     padding: 16px;
 `;
@@ -242,16 +242,16 @@ const ProjectsContent = () => {
     const openProjectWindow = (project) => {
         // Check if already open
         if (projectWindows.find(window => window.id === project.id)) {
-        focusWindow(project.id);
-        return;
+            focusWindow(project.id);
+            return;
         }
         
         const newWindow = {
-        id: project.id,
-        title: project.name,
-        project: project,
-        zIndex: nextZIndex,
-        position: { x: 200 + Math.random() * 100, y: 150 + Math.random() * 50 }
+            id: project.id,
+            title: project.name,
+            project: project,
+            zIndex: nextZIndex,
+            position: { x: 200 + Math.random() * 100, y: 150 + Math.random() * 50 }
         };
         
         setProjectWindows([...projectWindows, newWindow]);
@@ -280,14 +280,14 @@ const ProjectsContent = () => {
     
     const ProjectDetailsWindow = ({ project, id, title, onClose, onFocus, zIndex, position }) => (
         <DraggableWindow
-        id={id}
-        title={title}
-        initialPosition={position}
-        onClose={onClose}
-        onFocus={onFocus}
-        zIndex={zIndex}
-        width={500}
-        height={450}
+            id={id}
+            title={title}
+            initialPosition={position}
+            onClose={onClose}
+            onFocus={onFocus}
+            zIndex={zIndex}
+            width={500}
+            height={450}
         >
         <div className="p-4">
             <h2 className="text-xl font-bold mb-4">{project.name}</h2>
