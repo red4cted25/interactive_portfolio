@@ -130,7 +130,7 @@ const Win98Portfolio = () => {
   const windowContents = {
     'about': { component: <AboutMeContent />, title: 'About Me', width: 450, height: 400 },
     'projects': { component: <ProjectsContent />, title: 'My Projects', width: 500, height: 450 },
-    'resume': { component: <ResumeContent />, title: 'Resume', width: 550, height: 550 },
+    'resume': { component: <ResumeContent />, title: 'Resume', width: 550, height: 375 },
     'contact': { component: <ContactContent />, title: 'Contact', width: 400, height: 500 }
   };
   
