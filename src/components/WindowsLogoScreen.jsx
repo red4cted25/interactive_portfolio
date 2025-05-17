@@ -53,8 +53,8 @@ const WindowsLogoScreen = () => {
     return (
         <LogoContainer>
         <Logo 
-            src="https://res.cloudinary.com/drnaycy06/image/upload/v1745532998/Windows_Logo__1992-2001_.svg_osqvuf.png" 
-            alt="Windows 98 Logo"
+            src="https://res.cloudinary.com/drnaycy06/image/upload/v1747509745/ComputerLoad_xorjdn.gif" 
+            alt="Loading Logo"
         />
         {/* TODO: CHECK WIREFRAME IMPROVE LATER */}
         <LoadingText>
