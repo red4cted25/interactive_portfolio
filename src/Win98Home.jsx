@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import DraggableWindow from './components/Window';
-import AboutMeContent from './components/AboutMe';
-import ProjectsContent from './components/Projects';
-import ResumeContent from './components/Resume';
-import ContactContent from './components/ContactMe';
+import AboutMeContent from './AboutMe';
+import ProjectsContent from './Projects';
+import ResumeContent from './Resume';
+import ContactContent from './ContactMe';
 // ** React95 Imports **
 import { AppBar, Button, Toolbar, MenuList, MenuListItem, Separator, styleReset} from 'react95';
 import { createGlobalStyle, ThemeProvider, styled } from 'styled-components';
@@ -130,7 +130,7 @@ const Win98Portfolio = () => {
   const windowContents = {
     'about': { component: <AboutMeContent />, title: 'About Me', width: 450, height: 400 },
     'projects': { component: <ProjectsContent />, title: 'My Projects', width: 500, height: 450 },
-    'resume': { component: <ResumeContent />, title: 'Resume', width: 550, height: 550 },
+    'resume': { component: <ResumeContent />, title: 'Resume', width: 550, height: 375 },
     'contact': { component: <ContactContent />, title: 'Contact', width: 400, height: 500 }
   };
   
@@ -138,34 +138,40 @@ const Win98Portfolio = () => {
     setIsStartMenuOpen(!isStartMenuOpen);
   };
   
+  const centerWindowPosition = (width, height) => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    return {
+      x: (screenWidth - width) / 2 + Math.floor(Math.random() * 50) - 20,
+      y: (screenHeight - height) / 2 + Math.floor(Math.random() * 50) - 20,
+    };
+  };
+
   const openWindow = (type) => {
     const windowContent = windowContents[type];
-    
-    // Check if window is already open
+  
     if (openWindows.some(window => window.type === type)) {
-      // Focus the existing window instead of opening a new one
       focusWindow(openWindows.find(window => window.type === type).id);
       return;
     }
-    
-    // Generate random position with offset to avoid exact overlapping
-    const xPos = 200 + Math.floor(Math.random() * 100);
-    const yPos = -200 + Math.floor(Math.random() * 100);
-    
+  
+    const position = centerWindowPosition(windowContent.width, windowContent.height);
+  
     const newWindow = {
       id: Date.now(),
       type,
       title: windowContent.title,
-      position: { x: xPos, y: yPos },
+      position,
       zIndex: nextZIndex,
       width: windowContent.width,
       height: windowContent.height
     };
-    
+  
     setOpenWindows([...openWindows, newWindow]);
     setNextZIndex(nextZIndex + 1);
     setIsStartMenuOpen(false);
   };
+  
   
   const closeWindow = (id) => {
     setOpenWindows(openWindows.filter(window => window.id !== id));
@@ -240,12 +246,13 @@ const Win98Portfolio = () => {
               key={window.id}
               id={window.id}
               title={window.title}
-              initialPosition={window.position}
-              onClose={closeWindow}
-              onFocus={focusWindow}
+              content={windowContents[window.type].component}
+              position={window.position}
               zIndex={window.zIndex}
               width={window.width}
               height={window.height}
+              onClose={closeWindow}
+              onFocus={focusWindow}
             >
               {windowContents[window.type].component}
             </DraggableWindow>

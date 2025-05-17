@@ -1,40 +1,91 @@
-import Draggable from "react-draggable";
-import { Button, ScrollView, Window, WindowHeader, WindowContent } from 'react95';
-import { styled } from 'styled-components';
+import { useMediaQuery } from 'react-responsive';
+import { Window, WindowHeader, WindowContent, Button } from 'react95';
+import styled from 'styled-components';
+import { Rnd } from 'react-rnd';
 
 const StyledWindow = styled(Window)`
     position: absolute;
-    min-width: 320px;
+    display: flex;
+    flex-direction: column;
 `;
 
-const DraggableWindow = ({ id, title, children, initialPosition, onClose, onFocus, zIndex, width = 400, height = 'auto' }) => {
-    return (
-        <Draggable 
-            defaultPosition={initialPosition} 
-            handle=".window-header"
-            bounds="parent"
+const HeaderBar = styled(WindowHeader)`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    user-select: none;
+    padding-right: 6px;
+`;
+
+const CloseButton = styled(Button)`
+    margin-left: 4px;
+`;
+
+const DraggableWindow = ({
+        id,
+        title,
+        content,
+        position,
+        zIndex,
+        onClose,
+        onFocus,
+        width,
+        height,
+    }) => {
+    const isMobile = useMediaQuery({ maxWidth: 768 });
+
+    if (isMobile) {
+        return (
+        <StyledWindow
+            style={{
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '85vw',
+                height: '85vh',
+                zIndex,
+            }}
+            onClick={() => onFocus(id)}
         >
-            <StyledWindow 
-                style={{ 
-                    zIndex, 
-                    width, 
-                    maxHeight: '90vh',
-                }} 
-                onClick={() => onFocus(id)}
-            >
-                <WindowHeader className="window-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span>{title}</span>
-                    <Button onClick={() => onClose(id)}>
-                        <span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>×</span>
-                    </Button>
-                </WindowHeader>
-                <ScrollView>
-                    <WindowContent className="overflow-y-auto" style={{ maxHeight: 'calc(80vh - 33px)' }}>
-                        {children}
-                    </WindowContent>
-                </ScrollView>
-            </StyledWindow>
-        </Draggable>
+            <HeaderBar>
+            <span>{title}</span>
+            <CloseButton size="sm" onClick={() => onClose(id)}>
+                <span style={{ fontWeight: 'bold' }}>×</span>
+            </CloseButton>
+            </HeaderBar>
+            <WindowContent style={{ overflowY: 'auto' }}>{content}</WindowContent>
+        </StyledWindow>
+        );
+    }
+
+    // Desktop: Draggable and resizable
+    return (
+        <Rnd
+            bounds="parent"
+            default={{
+                x: position.x,
+                y: position.y,
+                width,
+                height,
+            }}
+            minWidth={300}
+            minHeight={200}
+            dragHandleClassName="title-bar"
+            style={{ zIndex }}
+            onMouseDown={() => onFocus(id)}
+        >
+        <StyledWindow resizable >
+            <HeaderBar className="title-bar" active>
+            <span>{title}</span>
+            <CloseButton size="sm" onClick={() => onClose(id)}>
+                <span style={{ fontWeight: 'bold' }}>×</span>
+            </CloseButton>
+            </HeaderBar>
+            <WindowContent style={{ overflowY: 'auto' }}>{content}</WindowContent>
+        </StyledWindow>
+        </Rnd>
     );
 };
 

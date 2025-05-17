@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AppStarter from './AppStarter';
+import Win98Portfolio from './Win98Home';
 
 const preloadResources = () => {
     const sounds = [
