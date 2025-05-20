@@ -96,7 +96,6 @@ const StatusBar = styled(Toolbar)`
 
 const ProjectsContent = () => {
     const [selectedFolder, setSelectedFolder] = useState(null);
-    const [selectedProject, setSelectedProject] = useState(null);
     const [currentPath, setCurrentPath] = useState('C:\\Projects');
     const [projectWindows, setProjectWindows] = useState([]);
     const [nextZIndex, setNextZIndex] = useState(1000);
@@ -235,7 +234,6 @@ const ProjectsContent = () => {
     };
     
     const handleProjectClick = (project) => {
-        setSelectedProject(project);
         openProjectWindow(project);
     };
     

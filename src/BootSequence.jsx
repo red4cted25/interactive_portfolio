@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Win98Home from './Win98Home';
 import BiosScreen from './components/BiosScreen';
 import WindowsLogoScreen from './components/WindowsLogoScreen';
@@ -25,55 +25,45 @@ const BlackScreen = styled.div`
 
 const BootSequence = () => {
     const [bootStage, setBootStage] = useState('bios');
-    
-    // Reference to audio elements
-    const floppyDriveSound = new Audio('./sounds/floppy_drive.mp3');
-    const startupSound = new Audio('./sounds/windows98_startup.mp3');
-    
+
+    const floppyDriveSound = useRef(new Audio('./sounds/floppy_drive.mp3'));
+    const startupSound = useRef(new Audio('./sounds/windows98_startup.mp3'));
+
     useEffect(() => {
-        // Boot sequence timing management
         const bootTimeline = async () => {
-        // BIOS stage (typically lasts about 8-10 seconds)
-        if (bootStage === 'bios') {
-            // Play floppy drive sound at specific points during BIOS
-            setTimeout(() => {
-            floppyDriveSound.play();
-            }, 2000);
-            
-            // After BIOS completes, transition to black screen
-            setTimeout(() => {
-                setBootStage('blackTransition1');
-            }, 8000);
-        }
-        
-        // First black screen transition (about 1.5 seconds)
-        if (bootStage === 'blackTransition1') {
-            setTimeout(() => {
-                setBootStage('windowsLogo');
-            }, 1500);
-        }
-        
-        // Windows logo screen
-        if (bootStage === 'windowsLogo') {
-            // Play Windows startup sound when logo appears
-            setTimeout(() => {
-                startupSound.play();
-            }, 200);
-            
-            // Logo screen typically shows for 4-5 seconds
-            setTimeout(() => {
-                setBootStage('blackTransition2');
-            }, 4500);
-        }
-        
-        // Final black screen transition before desktop
-        if (bootStage === 'blackTransition2') {
-            setTimeout(() => {
-                setBootStage('desktop');
-            }, 1500);
-        }
+            if (bootStage === 'bios') {
+                setTimeout(() => {
+                    floppyDriveSound.current.play();
+                }, 2000);
+
+                setTimeout(() => {
+                    setBootStage('blackTransition1');
+                }, 8000);
+            }
+
+            if (bootStage === 'blackTransition1') {
+                setTimeout(() => {
+                    setBootStage('windowsLogo');
+                }, 1500);
+            }
+
+            if (bootStage === 'windowsLogo') {
+                setTimeout(() => {
+                    startupSound.current.play();
+                }, 200);
+
+                setTimeout(() => {
+                    setBootStage('blackTransition2');
+                }, 4500);
+            }
+
+            if (bootStage === 'blackTransition2') {
+                setTimeout(() => {
+                    setBootStage('desktop');
+                }, 1500);
+            }
         };
-        
+
         bootTimeline();
     }, [bootStage]);
     
