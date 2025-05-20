@@ -27,8 +27,8 @@ const BootSequence = () => {
     const [bootStage, setBootStage] = useState('bios');
     
     // Reference to audio elements
-    const floppyDriveSound = new Audio('/sounds/floppy_drive.mp3');
-    const startupSound = new Audio('/sounds/windows98_startup.mp3');
+    const floppyDriveSound = new Audio('./sounds/floppy_drive.mp3');
+    const startupSound = new Audio('./sounds/windows98_startup.mp3');
     
     useEffect(() => {
         // Boot sequence timing management

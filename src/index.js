@@ -5,11 +5,11 @@ import AppStarter from './AppStarter';
 
 const preloadResources = () => {
     const sounds = [
-        '/sounds/floppy_drive.mp3',
-        '/sounds/windows98_startup.mp3',
+        './sounds/floppy_drive.mp3',
+        './sounds/windows98_startup.mp3',
     ];
     
-    sounds.forEach(sound => {
+    sounds.forEach((sound) => {
         const audio = new Audio();
         audio.src = sound;
         audio.preload = 'auto';
